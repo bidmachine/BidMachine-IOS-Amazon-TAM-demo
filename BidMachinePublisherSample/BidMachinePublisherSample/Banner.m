@@ -5,52 +5,61 @@
 
 #import "Banner.h"
 
-@interface Banner ()<BDMBannerDelegate>
+@interface Banner ()<BDMBannerDelegate, DTBAdCallback>
 
-@property (weak, nonatomic) IBOutlet UIView *container;
-@property (nonatomic, strong) BDMBannerView *bannerView;
+@property (weak, nonatomic) IBOutlet BDMBannerView *bannerView;
 
 @end
 
 @implementation Banner
 
-- (void)loadAd:(id)sender {
-    __weak typeof(self) weakSelf = self;
-    [AppDelegate prepareBiddingParamsForFormat:BDMAdUnitFormatBanner320x50
-                                        slotId:@"88e6293b-0bf0-43fc-947b-925babe7bf3f"
-                                    completion:^(NSDictionary<NSString *,NSString *> *biddingParams, NSError *error) {
-        if (error) {
-            return;
-        }
-        weakSelf.bannerView = [BDMBannerView new];
-        weakSelf.bannerView.delegate = weakSelf;
-        [weakSelf.bannerView populateWithRequest:({
-            BDMBannerRequest *request = BDMBannerRequest.new;
-            request.adSize = BDMBannerAdSize320x50;
-            request.networkConfigurations = @[[BDMAdNetworkConfiguration buildWithBuilder:^(BDMAdNetworkConfigurationBuilder *builder) {
-                builder.appendName(@"amazon");
-                builder.appendNetworkClass(BDMAmazonNetwork.class);
-                builder.appendAdUnit(BDMAdUnitFormatBanner320x50, biddingParams, nil);
-            }]];
-            request;
-        })];
-    }];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.bannerView.delegate = self;
 }
 
-- (void)showAd:(id)sender {
-    if (!self.bannerView) {
+- (void)loadAd:(id)sender {
+    [self requestAPSBidWidth:320 height:50 slotUUID:@"88e6293b-0bf0-43fc-947b-925babe7bf3f"];
+}
+
+- (void)requestAPSBidWidth:(int)width height:(int)height slotUUID:(NSString*)slotUUID {
+    DTBAdLoader *adLoader = [DTBAdLoader new];
+    DTBAdSize *size = [[DTBAdSize alloc] initBannerAdSizeWithWidth:width height:height andSlotUUID:slotUUID];
+    [adLoader setSizes:size, nil];
+    [adLoader loadAd:self];
+}
+
+- (void)requestBidmachineWithTargetingParams:(NSDictionary *)params {
+    [self.bannerView populateWithRequest:({
+        BDMBannerRequest *request = BDMBannerRequest.new;
+        request.adSize = BDMBannerAdSize320x50;
+        request.networkConfigurations = @[[BDMAdNetworkConfiguration buildWithBuilder:^(BDMAdNetworkConfigurationBuilder *builder) {
+            builder.appendName(@"amazon");
+            builder.appendNetworkClass(BDMAmazonNetwork.class);
+            builder.appendAdUnit(BDMAdUnitFormatBanner320x50, params, nil);
+        }]];
+        request;
+    })];
+}
+
+#pragma mark - DTBAdCallback
+
+- (void)onFailure: (DTBAdError)error {
+    
+}
+
+- (void)onSuccess: (DTBAdResponse *)adResponse {
+    if (!adResponse.customTargeting) {
         return;
     }
-    self.bannerView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.container.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.container addSubview:self.bannerView];
-    [NSLayoutConstraint activateConstraints:
-    @[
-      [self.bannerView.centerXAnchor constraintEqualToAnchor:self.container.centerXAnchor],
-      [self.bannerView.centerYAnchor constraintEqualToAnchor:self.container.centerYAnchor],
-      [self.bannerView.widthAnchor constraintEqualToAnchor:self.container.widthAnchor],
-      [self.bannerView.heightAnchor constraintEqualToConstant:50]
-      ]];
+    
+    // We work with NSDictionary<NSString *, NSString *>
+    NSMutableDictionary *bidding = adResponse.customTargeting.mutableCopy;
+    bidding[@"amznrdr"] = [bidding[@"amznrdr"] firstObject];
+    bidding[@"amznp"] = [bidding[@"amznp"] firstObject];
+    bidding[@"dc"] = [bidding[@"dc"] firstObject];
+    
+    [self requestBidmachineWithTargetingParams:bidding];
 }
 
 #pragma mark - BDMBannerDelegate

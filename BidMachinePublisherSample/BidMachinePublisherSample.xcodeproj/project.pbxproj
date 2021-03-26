@@ -10,7 +10,6 @@
 		323189F5D5DB8626313AE11B /* libPods-BidMachinePublisherSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301E50FC279E927E23C2BBFA /* libPods-BidMachinePublisherSample.a */; };
 		374B363025E6829C005F1499 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B362F25E6829C005F1499 /* Empty.swift */; };
 		3781274525F7FE5400DAA57D /* BDMAmazonNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 3781273D25F7FE5400DAA57D /* BDMAmazonNetwork.m */; };
-		3781274625F7FE5400DAA57D /* BDMAmazonAdLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3781273E25F7FE5400DAA57D /* BDMAmazonAdLoader.m */; };
 		3781274825F7FE5400DAA57D /* BDMAmazonAdObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3781274025F7FE5400DAA57D /* BDMAmazonAdObject.m */; };
 		65693AF12390F700007B0D33 /* BaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65693AEE2390F700007B0D33 /* BaseView.xib */; };
 		65693AF22390F700007B0D33 /* Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 65693AEF2390F700007B0D33 /* Base.m */; };
@@ -29,9 +28,7 @@
 		374B362F25E6829C005F1499 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		3781270E25F7EC3100DAA57D /* BidMachinePublisherSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BidMachinePublisherSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3781273D25F7FE5400DAA57D /* BDMAmazonNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMAmazonNetwork.m; sourceTree = "<group>"; };
-		3781273E25F7FE5400DAA57D /* BDMAmazonAdLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMAmazonAdLoader.m; sourceTree = "<group>"; };
 		3781274025F7FE5400DAA57D /* BDMAmazonAdObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMAmazonAdObject.m; sourceTree = "<group>"; };
-		3781274225F7FE5400DAA57D /* BDMAmazonAdLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMAmazonAdLoader.h; sourceTree = "<group>"; };
 		3781274325F7FE5400DAA57D /* BDMAmazonNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMAmazonNetwork.h; sourceTree = "<group>"; };
 		3781274425F7FE5400DAA57D /* BDMAmazonAdObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMAmazonAdObject.h; sourceTree = "<group>"; };
 		65693AEE2390F700007B0D33 /* BaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseView.xib; sourceTree = "<group>"; };
@@ -125,8 +122,6 @@
 				3781273C25F7FE5400DAA57D /* BDMAmazonAdapter */,
 				D96190F3222957C50057C11A /* AppDelegate.h */,
 				D96190F4222957C50057C11A /* AppDelegate.m */,
-				3781274225F7FE5400DAA57D /* BDMAmazonAdLoader.h */,
-				3781273E25F7FE5400DAA57D /* BDMAmazonAdLoader.m */,
 				65693AEC2390F6BA007B0D33 /* AdControllers */,
 				65693B042390F7F2007B0D33 /* ApplicationSupport */,
 			);
@@ -270,7 +265,6 @@
 				3781274525F7FE5400DAA57D /* BDMAmazonNetwork.m in Sources */,
 				65693AF22390F700007B0D33 /* Base.m in Sources */,
 				65693AFC2390F740007B0D33 /* Banner.m in Sources */,
-				3781274625F7FE5400DAA57D /* BDMAmazonAdLoader.m in Sources */,
 				374B363025E6829C005F1499 /* Empty.swift in Sources */,
 				D9619103222957C60057C11A /* main.m in Sources */,
 				3781274825F7FE5400DAA57D /* BDMAmazonAdObject.m in Sources */,

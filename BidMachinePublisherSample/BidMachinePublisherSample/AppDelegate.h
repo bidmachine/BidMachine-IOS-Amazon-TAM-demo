@@ -16,9 +16,5 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-+ (void)prepareBiddingParamsForFormat:(BDMAdUnitFormat)format
-                               slotId:(NSString *)slotId
-                           completion:(void(^)(NSDictionary<NSString *, NSString *> *, NSError *))completion;
-
 @end
 

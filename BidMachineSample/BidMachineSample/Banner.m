@@ -8,37 +8,23 @@
 
 @interface Banner ()<BDMBannerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *container;
-@property (nonatomic, strong) BDMBannerView *bannerView;
+@property (weak, nonatomic) IBOutlet BDMBannerView *bannerView;
 
 @end
 
 @implementation Banner
 
-- (void)loadAd:(id)sender {
-    self.bannerView = [BDMBannerView new];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     self.bannerView.delegate = self;
+}
+
+- (void)loadAd:(id)sender {
     [self.bannerView populateWithRequest:({
         BDMBannerRequest *request = BDMBannerRequest.new;
         request.adSize = BDMBannerAdSize320x50;
         request;
     })];
-}
-
-- (void)showAd:(id)sender {
-    if (!self.bannerView) {
-        return;
-    }
-    self.bannerView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.container.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.container addSubview:self.bannerView];
-    [NSLayoutConstraint activateConstraints:
-    @[
-      [self.bannerView.centerXAnchor constraintEqualToAnchor:self.container.centerXAnchor],
-      [self.bannerView.centerYAnchor constraintEqualToAnchor:self.container.centerYAnchor],
-      [self.bannerView.widthAnchor constraintEqualToAnchor:self.container.widthAnchor],
-      [self.bannerView.heightAnchor constraintEqualToConstant:50]
-      ]];
 }
 
 #pragma mark - BDMBannerDelegate
