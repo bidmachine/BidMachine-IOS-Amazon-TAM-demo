@@ -8,8 +8,7 @@ source 'https://github.com/appodeal/CocoaPods.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 def bidmachine
-  pod "BidMachine", "1.7.0.2-Beta"
-  pod "BDMIABAdapter", "1.7.0.2.0-Beta"
+  pod "BDMIABAdapter", "1.7.3.0"
 end
 
 def amazon
