@@ -11,6 +11,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     BDMSdkConfiguration *configuration = BDMSdkConfiguration.new;
+    configuration.targeting = BDMTargeting.new;
+    configuration.targeting.storeId = @"123";
     configuration.networkConfigurations = @[[BDMAdNetworkConfiguration buildWithBuilder:^(BDMAdNetworkConfigurationBuilder *builder) {
         builder.appendName(@"amazon");
         builder.appendNetworkClass(BDMAmazonNetwork.class);
